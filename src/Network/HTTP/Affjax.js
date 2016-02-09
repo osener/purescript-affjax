@@ -8,15 +8,15 @@
 // jshint maxparams: 5
 exports._ajax = function (mkHeader, options, canceler, errback, callback) {
   var platformSpecific = { };
-  if (typeof module !== "undefined" && module.require) {
+  if (typeof module !== "undefined" && module.exports) {
     // We are on node.js
     platformSpecific.newXHR = function () {
-      var XHR = module.require("xhr2");
+      var XHR = require("xhr2");
       return new XHR();
     };
 
     platformSpecific.fixupUrl = function (url) {
-      var urllib = module.require("url");
+      var urllib = require("url");
       var u = urllib.parse(url);
       u.protocol = u.protocol || "http:";
       u.hostname = u.hostname || "localhost";
